@@ -43,12 +43,16 @@ HashMap.prototype.Add = function(key, val){
             return;
         }
     }
-    this.table.push([key,val]);
+    this.table[index].push([key,val]);
     this.count++;
     if(this.count >= this.table.length*3){
         this._resize();
     }
 }
+
+HashMap.Add("Chris","Awesome");
+HashMap.Add("Mark","Dude");
+console.log(this.table);
 
 
 HashMap.prototype.Remove = function(key){
