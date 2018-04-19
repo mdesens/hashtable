@@ -12,7 +12,8 @@ class HashMap {
         }else if(this.table[hashCode] == null){
             return false;
         }
-        for(let i = 0; i < this.table[hashCode].length; i++){
+        for(let i = 0; i < this.table.length; i++){
+            console.log("Contains: "+this.table[hashCode]);
             if(this.table[hashCode][i][0] == key) return true;
         }
         return false;
