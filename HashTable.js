@@ -3,6 +3,8 @@ class HashMap {
         this.capacity = capacity;
         this.table = [];
         this.count = 0;
+
+        this.table.length = capacity;
     }
 
     contains(key){
@@ -12,8 +14,7 @@ class HashMap {
         }else if(this.table[hashCode] == null){
             return false;
         }
-        for(let i = 0; i < this.table.length; i++){
-            console.log("Contains: "+this.table[hashCode]);
+        for(let i = 0; i < this.table[hashCode].length; i++){
             if(this.table[hashCode][i][0] == key) return true;
         }
         return false;
@@ -47,7 +48,7 @@ HashMap.prototype.Add = function(key, val){
     this.table[index].push([key,val]);
     this.count++;
     if(this.count >= this.table.length*3){
-        this._resize();
+        // this._resize();
     }
 }
 
