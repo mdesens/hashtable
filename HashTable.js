@@ -1,5 +1,39 @@
+class HashMap {
+    constructor(capacity) {
+        this.capacity = capacity;
+        this.table = [];
+        this.count = 0;
+    }
+
+    contains(key){
+        let hashCode = key._hash() % this.table.length;
+        if(this.table.length == 0){
+            return false;
+        }else if(this.table[hashCode] == null){
+            return false;
+        }
+        for(let i = 0; i < this.table[hashCode].length; i++){
+            if(this.table[hashCode][i][0] == key) return true;
+        }
+        return false;
+    }
+}
+
+String.prototype._hash = function() {
+    let hash = 0;
+    if(this.length == 0) return hash;
+
+    for (let i = 0; i < this.length; i++) {
+        char = this.charCodeAt(i);
+        hash = ((hash<<5)-hash)+char;
+        hash &= hash;
+    }
+
+    return hash;
+}
+
 HashMap.prototype.Add = function(key, val){
-    let index = _hash(key) %  this.table.length;
+    let index = key._hash() %  this.table.length;
     if(this.table[index] == null){
         this.table[index] = [];
     } 
@@ -18,7 +52,7 @@ HashMap.prototype.Add = function(key, val){
 
 
 HashMap.prototype.Remove = function(key){
-    let index = _hash(key) %  this.table.length;
+    let index = key._hash() %  this.table.length;
     if(this.table[index] == null){
         return false;
     }
@@ -32,3 +66,10 @@ HashMap.prototype.Remove = function(key){
     }
 }
 
+let myHashMap = new HashMap(50);
+
+myHashMap.Add("name", "Mark");
+
+console.log(myHashMap);
+
+console.log(myHashMap.contains("name"));
